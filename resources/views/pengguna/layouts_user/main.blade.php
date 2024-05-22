@@ -4,13 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>DiKos</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/logo_app.png" rel="icon">
-  <link href="assets/img/logo_app.png" rel="logo_app">
+  <title>{{ ('Dikos') }} - @yield('title')</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo_app.png')}}"/>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -36,7 +31,7 @@
 
     <div>
         @yield('container')
-        @yield('landingPageHome')
+        @yield('content')
     </div>
 
     @stack('script')

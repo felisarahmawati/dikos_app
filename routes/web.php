@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -11,8 +13,13 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
-Route::get('/', function () {
-    return view('pengguna.landingpage.home');
-});
+// Route::get('/', function () {
+//     return view('pengguna.landingpage.home');
+// });
+
+route::get('/', [HomeController::class, 'index'])->name('pengguna.layouts_user.content');
+
+//admin
+route::get('/dashboard', [MainController::class, 'index'])->name('admin.layouts.main');
