@@ -1,4 +1,4 @@
-<header id="header" class="header d-flex align-items-center fixed-top">
+<header id="header" class="header d-flex align-items-center fixed-top" style="background-color: #37517e;">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
@@ -16,7 +16,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="#about">Login</a>
+      <a class="btn-getstarted" href="/login">Login</a>
 
     </div>
-  </header>
+</header>

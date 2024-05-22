@@ -33,7 +33,7 @@
         @yield('container')
         @yield('content')
     </div>
-
+    @yield('js')
     @stack('script')
     @include('pengguna.layouts_user.footer')
 

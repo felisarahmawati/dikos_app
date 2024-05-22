@@ -45,6 +45,7 @@
       <!-- Main Content -->
       <div class="main-content">
         @yield('content')
+        @yield('home')
 
 
 
