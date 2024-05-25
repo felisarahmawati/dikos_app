@@ -1,15 +1,20 @@
 <?php
 
-use App\Http\Controllers\DaftarPenghuniController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KamarController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\TampilanAboutController;
-use App\Http\Controllers\TampilanHomeController;
-use App\Http\Controllers\TipeKamarController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\KamarController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\TipeKamarController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ProdukDetailController;
+use App\Http\Controllers\TampilanHomeController;
+use App\Http\Controllers\TampilanAboutController;
+use App\Http\Controllers\DaftarPenghuniController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,46 +27,48 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::get('/', function () {
-//     return view('pengguna.landingpage.home');
-// });
+Auth::routes();
 
-route::get('/', [HomeController::class, 'index'])->name('pengguna.layouts_user.content');
-route::get('/produk', [HomeController::class, 'produk'])->name('pengguna.produk.index');
-route::get('/produkdetail', [HomeController::class, 'produkdetail'])->name('pengguna.produk.produkdetail.index');
-route::get('/history', [HomeController::class, 'history'])->name('pengguna.riwayatbooking.index');
+route::get('/', [LandingPageController::class, 'index'])->name('pengguna.layouts_user.content');
 
-Route::get('/login', function () {
-    return view('autentikasi.login');
+//Penghuni
+Route::middleware(['auth', 'checkrole:0'])->group(function() {
+    Route::get('/home', [HomeController::class, 'index']);
+    Route::resource('/produk', ProdukController::class);
+    Route::resource('/produkdetail', ProdukDetailController::class);
+    Route::resource('/history', HistoryController::class);
 });
 
-//admin
-route::get('/dashboard', [MainController::class, 'index'])->name('admin.layouts.main');
-
-Route::prefix("admin")->group(function () {
-    Route::prefix("landingpage")->group(function () {
-        Route::prefix("home")->group(function () {
-            Route::resource("/home", TampilanHomeController::class);
+//Admin
+Route::middleware(['auth', 'checkrole:1'])->group(function() {
+    Route::prefix("admin")->group(function() {
+        Route::prefix("layouts")->group(function() {
+            Route::get('/dashboard', [MainController::class, 'index'])->name('admin.layouts.dashboard');
         });
-        Route::prefix("about")->group(function () {
-            Route::resource("/about", TampilanAboutController::class);
+        Route::prefix("landingpage")->group(function () {
+            Route::prefix("home")->group(function () {
+                Route::resource("/home", TampilanHomeController::class);
+            });
+            Route::prefix("about")->group(function () {
+                Route::resource("/about", TampilanAboutController::class);
+            });
         });
-    });
+        Route::prefix("kamar")->group(function () {
+            Route::resource("/tipekamar", TipeKamarController::class);
+            Route::resource("/kamar", KamarController::class);
+        });
 
-    Route::prefix("kamar")->group(function () {
-        Route::resource("/tipekamar", TipeKamarController::class);
-        Route::resource("/kamar", KamarController::class);
-    });
+        Route::prefix("datapenghuni")->group(function () {
+            Route::resource("/penghuni", DaftarPenghuniController::class);
+        });
 
-    Route::prefix("datapenghuni")->group(function () {
-        Route::resource("/penghuni", DaftarPenghuniController::class);
-    });
+        Route::prefix("pembayaran")->group(function () {
+            Route::resource("/pembayaran", PembayaranController::class);
+        });
 
-    Route::prefix("pembayaran")->group(function () {
-        Route::resource("/pembayaran", PembayaranController::class);
-    });
-
-    Route::prefix("laporan")->group(function () {
-        Route::resource("/laporan", LaporanController::class);
+        Route::prefix("laporan")->group(function () {
+            Route::resource("/laporan", LaporanController::class);
+        });
     });
 });
+

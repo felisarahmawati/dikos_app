@@ -11,14 +11,25 @@
         <div class="container">
             <div class="row gy-4">
                 <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
-                    <h1 class="">Welcome to Dikos</h1>
-                    <p class="text-justify">Dikos adalah sebuah platform digital yang dirancang untuk memudahkan proses pencarian dan pemesanan kosan bagi masyarakat yang ingin mencari kosan</p>
+                    @forelse ($home as $item)
+                        <h1>{{ $item->teks1 }}</h1>
+                        <p>{{ $item->teks2 }}</p>
+                    @empty
+                        <h1 class="">Welcome to Dikos</h1>
+                        <p class="text-justify">Dikos adalah sebuah platform digital yang dirancang untuk memudahkan proses pencarian dan pemesanan kosan bagi masyarakat yang ingin mencari kosan</p>
+                    @endforelse
                     <div class="d-flex">
                         <a href="#about" class="btn-get-started">Get Started</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 image-home" data-aos="zoom-out" data-aos-delay="100">
-                    <img src="{{ asset('assets/img/dikos.png') }} " class="img-fluid animated" alt="">
+                    {{-- <img src="assets/img/image-home.png" class="img-fluid animated" alt=""> --}}
+                    @forelse ($home as $item)
+                        <img src="{{ Storage::url($item->gambar) }}" alt="{{ $item->id }}"
+                        class="img-fluid animated">
+                    @empty
+                        <img src="assets/img/dikos.png" class="img-fluid animated" alt="">
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -32,15 +43,36 @@
         </div><!-- End Section Title -->
         <div class="container">
             <div class="row gy-4">
+                @forelse ($about as $item)
+                    <p>{{ $item->teks1 }}</p>
+                @empty
+                    <p>Selamat datang di Aplikasi Dikos! Di sini, kami tidak hanya membantu Anda menemukan kosan sesuai dengan preferensi lokasi, fasilitas, dan budget Anda, tetapi juga menyediakan pengalaman menyenangkan dan praktis dalam proses pencarian dan pemesanan.</p>
+                @endforelse
                 <!-- <p></p> -->
                 <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-                    <img src="{{ asset ('assets/img/kos.png') }}" alt="img_about" class="img-fluid" />
+                    @forelse ($about as $item)
+                        <img src="{{ Storage::url($item->gambar) }}" alt="img_about" class="img-fluid" />
+                    @empty
+                        <img src="assets/img/kos.png" alt="img_about" class="img-fluid" />
+                    @endforelse
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                        <p class="text-justify">Dengan Aplikasi Dikos, Anda dapat mencari kosan berdasarkan lokasi preferensi Anda, fasilitas yang Anda butuhkan, serta budget yang Anda miliki. Di sini, kami menyediakan informasi yang terperinci mengenai setiap kosan, termasuk foto-foto, dan detail harga.
-                        Selain mencari kosan, kami juga memberikan kemudahan dalam proses pemesanan. Anda dapat memesan kamar pilihan Anda dengan mudah dan aman hanya dalam beberapa langkah. Setelah itu, Anda dapat melakukan pembayaran langsung melalui aplikasi, yang tidak hanya praktis, tetapi juga terjamin keamanannya.
-                        Dengan Aplikasi Dikos, proses mencari dan menyewa kosan menjadi lebih efisien, praktis, dan menyenangkan. Kami berkomitmen untuk memberikan pengalaman terbaik bagi pengguna kami. Jadi, tunggu apalagi? Ayo booking sekarang dan temukan kamar yang ada inginkan!</p>
-                        <a href="{{ route('pengguna.produk.index') }}" class="read-more"><span>Booking Sekarang!</span><i class="bi bi-arrow-right"></i></a>
+                        @forelse ($about as $item)
+                            <p class="text-justify">{{ $item->teks2 }}</p>
+                        @empty
+                        <h3>Mengapa memilih Aplikasi Dikos?</h3>
+
+                        <ul>
+                            <li><i class="bi bi-check2-circle"></i><span>Pencarian yang Mudah: Temukan kosan impian Anda dengan mudah berdasarkan lokasi yang Anda inginkan, fasilitas yang Anda butuhkan, dan budget yang Anda miliki.</span></li>
+                            <li><i class="bi bi-check2-circle"></i><span>Informasi Terperinci: Dapatkan informasi yang terperinci mengenai setiap kosan, termasuk foto-foto dan detail harga, sehingga Anda dapat membuat keputusan yang tepat.</span></li>
+                            <li><i class="bi bi-check2-circle"></i><span>Proses Pemesanan yang Praktis: Pesan kamar pilihan Anda hanya dalam beberapa langkah mudah, tanpa ribet.</span></li>
+                            <li><i class="bi bi-check2-circle"></i><span>Keamanan Pembayaran: Lakukan pembayaran langsung melalui aplikasi dengan aman dan praktis. Kami mengutamakan keamanan transaksi Anda.</span></li>
+                            <li><i class="bi bi-check2-circle"></i><span>Komitmen pada Kepuasan Pengguna: Kami berkomitmen untuk memberikan pengalaman terbaik bagi pengguna kami, dari awal hingga akhir. Kepuasan Anda adalah prioritas kami.</span></li>
+                        </ul>
+                    
+                        <p>Jadi, tunggu apa lagi? Ayo bergabung dengan jutaan pengguna lainnya dan temukan pengalaman menyewa kosan yang efisien, praktis, dan menyenangkan dengan Aplikasi Dikos. Booking sekarang dan temukan kamar impian Anda!</p>
+                        @endforelse
+                        <a href="{{ route('produk.index') }}" class="read-more"><span>Booking Sekarang!</span><i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -83,7 +115,7 @@
                     </div>
                 </div>
             </div>
-        </div>                 
+        </div>
     </section><!-- /Contact Section -->
 </main>
 @endsection

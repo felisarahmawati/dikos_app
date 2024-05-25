@@ -52,7 +52,7 @@
                                     <!-- Isi tabel -->
                                     <tbody>
                                         <tr>
-                                            <td class="text-center">1</td>
+                                            <td class="text-center"></td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
@@ -82,6 +82,6 @@
         </div>
     </div>
 
-    
+
 
 @endsection

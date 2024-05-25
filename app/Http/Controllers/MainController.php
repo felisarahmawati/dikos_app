@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -11,6 +12,9 @@ class MainController extends Controller
      */
     public function index()
     {
+        if (Auth::check() && Auth::user()->checkrole == '1') {
+            return redirect()->intended('dashboard');
+        }
         return view('admin.layouts.content');
     }
 

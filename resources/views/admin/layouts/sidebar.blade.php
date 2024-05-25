@@ -9,7 +9,9 @@
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
       <li class="dropdown">
-        <a class="nav-link {{('admin.layouts.main') }}" href="{{ route('admin.layouts.main') }}"><i class="fas fa-fire"></i></i><span>Dashboard</span></a>
+        {{-- <a class="nav-link {{('admin.layouts.main') }}" href="{{ route('admin.layouts.main') }}"><i class="fas fa-fire"></i></i><span>Dashboard</span></a> --}}
+        <a class="nav-link {{ Route::is('admin.layouts.dashboard') ? 'active' : '' }}" href="{{ route('admin.layouts.dashboard') }}"><i class="fas fa-fire"></i></i><span>Dashboard</span></a>
+
       </li>
       <li class="menu-header">Menu</li>
       <li class="dropdown">
@@ -17,7 +19,7 @@
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
           <li><a class="nav-link" href="{{ route('about.index') }}">About</a></li>
-          <li><a class="nav-link" href="">Contact</a></li>
+          {{-- <li><a class="nav-link" href="">Contact</a></li> --}}
         </ul>
       </li>
 

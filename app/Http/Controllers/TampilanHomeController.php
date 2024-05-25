@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Home;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TampilanHomeController extends Controller
 {
@@ -11,7 +13,9 @@ class TampilanHomeController extends Controller
      */
     public function index()
     {
-        return view("admin.landingpage.home.index");
+        $home = Home::get();
+
+        return view("admin.landingpage.home.index", compact("home"));
     }
 
     /**
@@ -27,7 +31,31 @@ class TampilanHomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $existingData = Home::first();
+
+        if ($existingData) {
+            return redirect()->route('home.index')->with('gagal', 'Data hanya dapat diinputkan sekali');
+        }
+
+        $this->validate($request, [
+            'gambar' => 'required|mimes:jpg,jpeg,png',
+            'teks1' => 'required',
+            'teks2' => 'required',
+        ]);
+
+        $homePath = $request->file('gambar')->store('landingPage', 'public');
+
+        $home = Home::create([
+            'gambar' => $homePath,
+            'teks1' => $request->teks1,
+            'teks2' => $request->teks2
+        ]);
+
+        if ($home) {
+            return redirect()->route('home.index')->with('berhasil', 'Data berhasil ditambahkan');
+        } else {
+            return redirect()->route('home.index')->with('gagal', 'Data gagal ditambahkan');
+        }
     }
 
     /**
@@ -51,7 +79,32 @@ class TampilanHomeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'gambar' => 'mimes:jpg,jpeg,png',
+            'teks1' => 'required',
+            'teks2' => 'required',
+        ]);
+
+        $home = Home::findOrFail($id);
+
+        $homePath = $home->gambar;
+
+        if ($request->hasFile('gambar')) {
+            Storage::disk('public')->delete($homePath);
+            $homePath = $request->file('gambar')->store('landingPage', 'public');
+        }
+
+        $home->update([
+            'gambar' => $homePath,
+            'teks1' => $request->teks1,
+            'teks2' => $request->teks2
+        ]);
+
+        if ($home) {
+            return redirect()->route('home.index')->with('berhasil', 'Data berhasil diperbarui');
+        } else {
+            return redirect()->route('home.index')->with('gagal', 'Data gagal diperbarui');
+        }
     }
 
     /**
@@ -59,6 +112,18 @@ class TampilanHomeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $home = Home::findOrFail($id);
+
+        $gambarPath = $home->gambar;
+
+        Storage::disk('public')->delete($gambarPath);
+
+        $home->delete();
+
+        if ($home) {
+            return redirect()->route('home.index')->with('berhasil', 'Data berhasil dihapus');
+        } else {
+            return redirect()->route('home.index')->with('gagal', 'Data gagal dihapus');
+        }
     }
 }

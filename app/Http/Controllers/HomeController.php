@@ -2,78 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Home;
+use App\Models\About;
+use App\Models\Kamar;
+use App\Models\tipekamar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('pengguna.layouts_user.content');
-    }
+        $home = Home::get();
+        $about = About::get();
+        $tipekamar = tipekamar::get();
+        $kamar = Kamar::get();
 
-    public function produk()
-    {
-        return view('pengguna.produk.index');
-    }
+        if (Auth::check() && Auth::user()->checkrole == '0') {
+            return redirect()->intended('admin');
+        }
 
-    public function produkdetail()
-    {
-        return view('pengguna.produk.produkdetail.index');
-    }
-
-    public function history()
-    {
-        return view('pengguna.riwayatbooking.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $tipekamar = tipekamar::get();
+        return view('pengguna.layouts_user.content', compact("home", "about", "tipekamar", "kamar"));
     }
 }

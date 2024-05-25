@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TampilanAboutController extends Controller
 {
@@ -11,7 +13,8 @@ class TampilanAboutController extends Controller
      */
     public function index()
     {
-        return view("admin.landingpage.about.index");
+        $about = About::get();
+        return view("admin.landingpage.about.index", compact("about"));
     }
 
     /**
@@ -27,7 +30,33 @@ class TampilanAboutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        {
+            $existingData = About::first();
+
+            if ($existingData) {
+                return redirect()->route('about.index')->with('gagal', 'Data hanya dapat diinputkan sekali');
+            }
+
+            $this->validate($request, [
+                'gambar' => 'required|mimes:jpg,jpeg,png',
+                'teks1' => 'required',
+                'teks2' => 'required',
+            ]);
+
+            $aboutPath = $request->file('gambar')->store('landingPage', 'public');
+
+            $about = About::create([
+                'gambar' => $aboutPath,
+                'teks1' => $request->teks1,
+                'teks2' => $request->teks2
+            ]);
+
+            if ($about) {
+                return redirect()->route('about.index')->with('berhasil', 'Data berhasil ditambahkan');
+            } else {
+                return redirect()->route('about.index')->with('gagal', 'Data gagal ditambahkan');
+            }
+        }
     }
 
     /**
@@ -51,7 +80,34 @@ class TampilanAboutController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        {
+            $this->validate($request, [
+                'gambar' => 'mimes:jpg,jpeg,png',
+                'teks1' => 'required',
+                'teks2' => 'required',
+            ]);
+
+            $about = About::findOrFail($id);
+
+            $aboutPath = $about->gambar;
+
+            if ($request->hasFile('gambar')) {
+                Storage::disk('public')->delete($aboutPath);
+                $aboutPath = $request->file('gambar')->store('landingPage', 'public');
+            }
+
+            $about->update([
+                'gambar' => $aboutPath,
+                'teks1' => $request->teks1,
+                'teks2' => $request->teks2
+            ]);
+
+            if ($about) {
+                return redirect()->route('about.index')->with('berhasil', 'Data berhasil diperbarui');
+            } else {
+                return redirect()->route('about.index')->with('gagal', 'Data gagal diperbarui');
+            }
+        }
     }
 
     /**
@@ -59,6 +115,18 @@ class TampilanAboutController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $about = About::findOrFail($id);
+
+        $gambarPath = $about->gambar;
+
+        Storage::disk('public')->delete($gambarPath);
+
+        $about->delete();
+
+        if ($about) {
+            return redirect()->route('about.index')->with('berhasil', 'Data berhasil dihapus');
+        } else {
+            return redirect()->route('about.index')->with('gagal', 'Data gagal dihapus');
+        }
     }
 }

@@ -14,8 +14,9 @@
                         <img src="assets/img/logo_app.png" alt="logo" width="100" class="mb-3">
                         <h4 class="mb-4">Login</h4>
                     </div>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-                    <form method="POST" action="#" class="needs-validation" novalidate="">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="text" name="email" class="form-control" id="email"
@@ -39,10 +40,12 @@
                             @enderror
                         </div>
 
-                        <div class="form-group mb-3">
-                            <div class="input-group">
-                                <a href="auth-forgot-password.html" class="btn btn-link">Forgot Password?</a>
-                            </div>
+                        <div class="mb-3">
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
                         </div>
 
                         <div class="form-group mb-4 text-center"> <!-- Mengubah posisi button login menjadi di tengah -->
@@ -50,13 +53,11 @@
                                 Login
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>
-
             <div class="mt-3 text-center">
-                Belum punya akun? <a href="auth-register.html">Buat Akun</a>
+                Belum punya akun? <a href="{{ route('register') }}">Buat Akun</a>
             </div>
         </div>
     </div>
