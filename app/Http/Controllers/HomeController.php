@@ -14,6 +14,21 @@ class HomeController extends Controller
         return view('pengguna.layouts_user.content');
     }
 
+    public function produk()
+    {
+        return view('pengguna.produk.index');
+    }
+
+    public function produkdetail()
+    {
+        return view('pengguna.produk.produkdetail.index');
+    }
+
+    public function history()
+    {
+        return view('pengguna.riwayatbooking.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

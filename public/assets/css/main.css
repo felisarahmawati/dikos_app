@@ -2144,3 +2144,22 @@ section,
 .starter-section {
     /* Add your styles here */
   }
+
+  .facilities {
+    display: flex;
+    flex-wrap: wrap;
+}
+.facilities ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1 1 50%;
+}
+.facilities ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.facilities ul li i {
+    margin-right: 10px;
+}

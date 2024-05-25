@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Controllers\DaftarPenghuniController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MainController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\TipeKamarController;
-use App\Http\Controllers\TampilanHomeController;
 use App\Http\Controllers\TampilanAboutController;
+use App\Http\Controllers\TampilanHomeController;
+use App\Http\Controllers\TipeKamarController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +26,14 @@ use App\Http\Controllers\TampilanAboutController;
 //     return view('pengguna.landingpage.home');
 // });
 
+route::get('/', [HomeController::class, 'index'])->name('pengguna.layouts_user.content');
+route::get('/produk', [HomeController::class, 'produk'])->name('pengguna.produk.index');
+route::get('/produkdetail', [HomeController::class, 'produkdetail'])->name('pengguna.produk.produkdetail.index');
+route::get('/history', [HomeController::class, 'history'])->name('pengguna.riwayatbooking.index');
+
 Route::get('/login', function () {
     return view('autentikasi.login');
 });
-
-route::get('/', [HomeController::class, 'index'])->name('pengguna.layouts_user.content');
 
 //admin
 route::get('/dashboard', [MainController::class, 'index'])->name('admin.layouts.main');
