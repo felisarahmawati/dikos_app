@@ -21,7 +21,7 @@ class LandingPageController extends Controller
             $tipekamar = tipekamar::get();
             $kamar = Kamar::get();
 
-            return view('pengguna.layouts_user.content', compact("home", "about", "tipekamar"));
+            return view('pengguna.layouts_user.content', compact("home", "about", "tipekamar", "kamar"));
         }
     }
 
