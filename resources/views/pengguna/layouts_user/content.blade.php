@@ -58,7 +58,17 @@
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                         @forelse ($about as $item)
-                            <p class="text-justify">{{ $item->teks2 }}</p>
+                        <h3>Mengapa memilih Aplikasi Dikos?</h3>
+
+                        <ul>
+                            <li><i class="bi bi-check2-circle"></i><span>Pencarian yang Mudah: Temukan kosan impian Anda dengan mudah berdasarkan lokasi yang Anda inginkan, fasilitas yang Anda butuhkan, dan budget yang Anda miliki.</span></li>
+                            <li><i class="bi bi-check2-circle"></i><span>Informasi Terperinci: Dapatkan informasi yang terperinci mengenai setiap kosan, termasuk foto-foto dan detail harga, sehingga Anda dapat membuat keputusan yang tepat.</span></li>
+                            <li><i class="bi bi-check2-circle"></i><span>Proses Pemesanan yang Praktis: Pesan kamar pilihan Anda hanya dalam beberapa langkah mudah, tanpa ribet.</span></li>
+                            <li><i class="bi bi-check2-circle"></i><span>Keamanan Pembayaran: Lakukan pembayaran langsung melalui aplikasi dengan aman dan praktis. Kami mengutamakan keamanan transaksi Anda.</span></li>
+                            <li><i class="bi bi-check2-circle"></i><span>Komitmen pada Kepuasan Pengguna: Kami berkomitmen untuk memberikan pengalaman terbaik bagi pengguna kami, dari awal hingga akhir. Kepuasan Anda adalah prioritas kami.</span></li>
+                        </ul>
+
+                        <p class="text-justify">{{ $item->teks2 }}</p>
                         @empty
                         <h3>Mengapa memilih Aplikasi Dikos?</h3>
 
@@ -69,7 +79,7 @@
                             <li><i class="bi bi-check2-circle"></i><span>Keamanan Pembayaran: Lakukan pembayaran langsung melalui aplikasi dengan aman dan praktis. Kami mengutamakan keamanan transaksi Anda.</span></li>
                             <li><i class="bi bi-check2-circle"></i><span>Komitmen pada Kepuasan Pengguna: Kami berkomitmen untuk memberikan pengalaman terbaik bagi pengguna kami, dari awal hingga akhir. Kepuasan Anda adalah prioritas kami.</span></li>
                         </ul>
-                    
+
                         <p>Jadi, tunggu apa lagi? Ayo bergabung dengan jutaan pengguna lainnya dan temukan pengalaman menyewa kosan yang efisien, praktis, dan menyenangkan dengan Aplikasi Dikos. Booking sekarang dan temukan kamar impian Anda!</p>
                         @endforelse
                         <a href="{{ route('produk.index') }}" class="read-more"><span>Booking Sekarang!</span><i class="bi bi-arrow-right"></i></a>

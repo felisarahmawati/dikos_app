@@ -54,11 +54,11 @@
                                     <tbody>
                                         @foreach ($about as $item)
                                         <tr>
-                                            <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-center"><img src="{{ Storage::url($item->gambar) }}"
+                                            <td class="text-justify">{{ $loop->iteration }}</td>
+                                            <td class="text-justify"><img src="{{ Storage::url($item->gambar) }}"
                                                 style="width: 25%;"></td>
-                                            <td class="text-center">{{ $item->teks1 }}</td>
-                                            <td class="text-center">{{ $item->teks2 }}</td>
+                                            <td class="text-justify">{{ $item->teks1 }}</td>
+                                            <td class="text-justify">{{ $item->teks2 }}</td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center">
                                                     <a class="btn btn-primary mx-2" data-bs-toggle="modal"

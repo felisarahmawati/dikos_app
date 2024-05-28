@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>{{ ('Dikos') }} - @yield('title')</title>
   <link rel="icon" type="image/x-icon" href="{{ asset('assets_admin/img/logo_app.png')}}"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -88,5 +89,77 @@
 
 
   @stack('page-scripts')
+</body>
+</html> --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>{{ ('Dikos') }} - @yield('title')</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('assets_admin/img/logo_app.png') }}"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS Umum -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <!-- CSS Library -->
+  <link rel="stylesheet" href="{{ asset('assets_admin/modules/datatables/datatables.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets_admin/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets_admin/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
+
+  <!-- CSS Template -->
+  <link rel="stylesheet" href="{{ asset('assets_admin/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets_admin/css/components.css') }}">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-94034622-3');
+  </script>
+
+  @stack('page-styles')
+</head>
+
+<body>
+<div id="app">
+  <div class="main-wrapper main-wrapper-1">
+    <div class="navbar-bg"></div>
+    @include('admin.layouts.header')
+    @include('admin.layouts.sidebar')
+
+    <!-- Konten Utama -->
+    <div class="main-content">
+      @yield('content')
+      @yield('home')
+    </div>
+    <footer class="main-footer">
+      @include('admin.layouts.footer')
+    </footer>
+  </div>
+</div>
+
+<!-- Script Umum -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="{{ asset('assets_admin/js/stisla.js') }}"></script>
+
+<!-- JS Library -->
+<script src="{{ asset('assets_admin/modules/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('assets_admin/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets_admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
+<script src="{{ asset('assets_admin/modules/jquery-ui/jquery-ui.min.js') }}"></script>
+
+<!-- JS Template -->
+<script src="{{ asset('assets_admin/js/scripts.js') }}"></script>
+<script src="{{ asset('assets_admin/js/custom.js') }}"></script>
+
+@stack('page-scripts')
 </body>
 </html>
