@@ -25,7 +25,7 @@
                     </div>
                 @empty
                     <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="text-right">Kamar A</h3>
+                        <h3 class="text-right">Tipe Kamar A</h3>
                         <img src="{{ asset('assets/img/kamarA.jpg') }}" alt="img_about" class="img-fluid" />
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">

@@ -139,7 +139,7 @@
                 </div>
                 <!-- Tombol simpan dan batal -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success btn-sm">Simpan</button>
+                    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModalPembayaran" class="btn btn-success btn-sm">Simpan</button>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Batal</button>
                 </div>
             </form>
@@ -147,4 +147,33 @@
     </div>
 </div>
 
+
+
+{{-- Modal Tambah --}}
+<div class="modal fade" id="exampleModalPembayaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 40%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pembayaran</h5>
+                <span class="alert-inner--icon"><span class="fas fa-exclamation-circle"></span></span><span class="alert-inner--text"><strong>Silahkan!</strong> Melakukan pembayaran sebesar <strong>Rp. </strong> ke  <strong>BANK BRI Syariah  AN </strong></span>   
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="image">Bukti Pembayaran</label>
+                            <input type="file" class="form-control" name="image" id="image">
+                        </div>   
+                    </div>
+                </div>
+                <!-- Tombol simpan dan batal -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-sm">Simpan</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
