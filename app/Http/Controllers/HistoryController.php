@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
@@ -11,7 +13,11 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return view('pengguna.riwayatbooking.index');
+        $userId = Auth::id();
+
+        $reservasi = Reservasi::where('user_id', $userId)->get();
+
+        return view('pengguna.riwayatbooking.index', compact("reservasi"));
     }
 
     /**

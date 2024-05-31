@@ -13,13 +13,13 @@
         </div><!-- End Section Title -->
         <div class="container">
             <div class="row gy-4 mt-2">
-                @forelse ($tipekamar as $item)
+                @forelse ($produk as $item)
                     <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="text-right">{{ $item->tipe_kamar }}</h3>
+                        <h3 class="text-right">{{ $item->tipeproduk->tipe_produk }}</h3>
                         <img src="{{ Storage::url($item->gambar) }}" alt="{{ $item->id }}" class="img-fluid">
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                        <b><p class="text mt-5">{{ $item->harga }}/bulan</p></b>
+                        <b><p class="text mt-5">{{ $item->tipeproduk->harga }}/bulan</p></b>
                         <p class="text-justify">{{ $item->deskripsi }}</p>
                         <a href="{{ route('produkdetail.index') }}" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
                     </div>
@@ -36,7 +36,7 @@
                 @endforelse
             </div>
         </div>
-        
+
     </section>
 </div>
 @endsection

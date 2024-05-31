@@ -11,8 +11,19 @@ class Kamar extends Model
 
     protected $table = 'kamars';
 
-    protected $guarded = [' '];
+    protected $fillable = [
+        'tipekamar_id',
+        'nomor_kamar',
+        'gambar',
+        'deskripsi',
+        'stok',
+    ];
 
+    public static function generateNomorKamar($tipekamar_id)
+    {
+        $stok = self::where('tipekamar_id', $tipekamar_id)->count();
+        return 'KAM-' . $tipekamar_id . '-' . ($stok + 1);
+    }
     public function tipekamar()
     {
         return $this->belongsTo(tipekamar::class,"tipekamar_id", "id");

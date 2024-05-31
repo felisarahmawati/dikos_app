@@ -82,7 +82,7 @@
 
                         <p>Jadi, tunggu apa lagi? Ayo bergabung dengan jutaan pengguna lainnya dan temukan pengalaman menyewa kosan yang efisien, praktis, dan menyenangkan dengan Aplikasi Dikos. Booking sekarang dan temukan kamar impian Anda!</p>
                         @endforelse
-                        <a href="{{ route('produk.index') }}" class="read-more"><span>Booking Sekarang!</span><i class="bi bi-arrow-right"></i></a>
+                        <a href="{{ route('produkdetail.index') }}" class="read-more"><span>Booking Sekarang!</span><i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

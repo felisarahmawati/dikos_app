@@ -26,8 +26,10 @@
       <li class="dropdown">
         <a href="#" class="nav-link has-dropdown"><i class="fa fa-bed"></i> <span>Kamar</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ route('tipekamar.index') }}">Tipe Kamar</a></li>
-          <li><a class="nav-link" href="{{ route('kamar.index') }}">Kamar</a></li>
+          {{-- <li><a class="nav-link" href="{{ route('tipekamar.index') }}">Tipe Kamar</a></li>
+          <li><a class="nav-link" href="{{ route('kamar.index') }}">Kamar</a></li> --}}
+          <li><a class="nav-link" href="{{ route('tipeprodukkamar.index') }}">Tipe Produk</a></li>
+          <li><a class="nav-link" href="{{ route('produkkamar.index') }}">Produk</a></li>
         </ul>
       </li>
 

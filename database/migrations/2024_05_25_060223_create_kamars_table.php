@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nomor_kamar');
             $table->string('gambar');
             $table->longText('deskripsi');
+            $table->integer('stok')->default(0);
             $table->timestamps();
         });
     }

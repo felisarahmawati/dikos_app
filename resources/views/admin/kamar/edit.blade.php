@@ -36,25 +36,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="mb-3">
-                                    <label class="nomor_kamar">Nomor Kamar</label>
-                                    <input type="text" name="nomor_kamar" class="form-control" value="{{ $item->nomor_kamar }}">
-                                </div>
-                            </div><!-- Col -->
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="mb-3">
                                     <label class="tipekamar">Harga</label>
                                     <div>
-                                        <select class="form-select" name="tipekamar_id" id="tipekamar_id" style="width: 100%">
-                                            <option value="">-- Pilih --</option>
-                                            @foreach ($tipekamar as $sdata)
-                                                <option value="{{ $sdata->id }}" {{ $sdata->id == $item->tipekamar_id ? 'selected' : '' }}>{{ $sdata->harga }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" class="form-control" value="{{ $item->tipekamar->harga }}" readonly>
                                     </div>
                                 </div>
-                            </div><!-- Col -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="mb-3">
+                                    <label class="stok">Stok</label>
+                                    <input type="number" name="stok" class="form-control" value="{{ $item->stok }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -62,7 +59,7 @@
                                     <label class="deskripsi">Deskripsi</label>
                                     <input type="text" name="deskripsi" class="form-control" value="{{ $item->deskripsi }}">
                                 </div>
-                            </div><!-- Col -->
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer d-md-block">

@@ -15,7 +15,7 @@ class TipeKamarController extends Controller
     public function index()
     {
         $tipekamar = tipekamar::get();
-        
+
         return view("admin.kamar.tipekamar.index", compact("tipekamar"));
     }
 
@@ -58,10 +58,12 @@ class TipeKamarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    // public function show(string $tipe_kamar)
+    // {
+    //     $tipekamar = tipekamar::where('tipe_kamar', $tipe_kamar)->firstOrFail();
+
+    //     return view('produk.index', compact('tipekamar'));
+    // }
 
     /**
      * Show the form for editing the specified resource.

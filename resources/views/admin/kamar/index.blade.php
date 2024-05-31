@@ -59,6 +59,7 @@
                                             <th class="text-center">Gambar</th>
                                             <th class="text-center">Deskripsi</th>
                                             <th class="text-center">Harga</th>
+                                            <th class="text-center">Stok</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -73,6 +74,7 @@
                                                 style="width: 50%;" style="height: 50%;"></td>
                                             <td class="text-justify">{{ $data->deskripsi }}</td>
                                             <td class="text-justify">{{ $data->tipekamar->harga }}</td>
+                                            <td class="text-justify">{{ $data->stok }}</td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center">
                                                     <a class="btn btn-primary mx-2" data-bs-toggle="modal"
@@ -142,13 +144,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="nomor_kamar">Nomor Kamar</label>
-                                <input type="text" name="nomor_kamar" class="form-control" placeholder="Masukkan nomor kamar">
-                            </div>
-                        </div><!-- Col -->
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="harga">Harga</label>
                                 <select class="form-select" name="tipekamar_id" id="tipekamar_id" style="width: 100%">
@@ -161,6 +157,14 @@
                                 </select>
                             </div>
                         </div><!-- Col -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="mb-3">
+                                <label for="stok" class="form-label">Stok</label>
+                                <input type="number" class="form-control" id="stok" name="stok" min="1" required>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">

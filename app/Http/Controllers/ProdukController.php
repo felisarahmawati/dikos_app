@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kamar;
-use App\Models\tipekamar;
+use App\Models\Produk;
+use App\Models\TipeProduk;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -13,10 +13,11 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $kamar = Kamar::get();
-        $tipekamar = tipekamar::get();
+        $produk = Produk::get();
+        $tipeproduk = TipeProduk::get();
 
-        return view('pengguna.produk.index', compact("kamar", "tipekamar"));
+
+        return view('pengguna.produk.index', compact("produk", "tipeproduk"));
     }
 
     /**

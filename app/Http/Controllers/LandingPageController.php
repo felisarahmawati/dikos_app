@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Home;
 use App\Models\About;
 use App\Models\Kamar;
+use App\Models\Produk;
+use App\Models\Reservasi;
 use App\Models\tipekamar;
+use App\Models\TipeProduk;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -18,10 +21,11 @@ class LandingPageController extends Controller
         {
             $home = Home::get();
             $about = About::get();
-            $tipekamar = tipekamar::get();
-            $kamar = Kamar::get();
+            $produk = Produk::get();
+            $tipeproduk =TipeProduk::get();
+            $reservasi =Reservasi::get();
 
-            return view('pengguna.layouts_user.content', compact("home", "about", "tipekamar", "kamar"));
+            return view('pengguna.layouts_user.content', compact("home", "about", "tipeproduk", "produk", "reservasi"));
         }
     }
 

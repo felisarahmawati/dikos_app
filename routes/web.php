@@ -11,10 +11,13 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\TipeKamarController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ProdukKamarController;
 use App\Http\Controllers\ProdukDetailController;
 use App\Http\Controllers\TampilanHomeController;
 use App\Http\Controllers\TampilanAboutController;
 use App\Http\Controllers\DaftarPenghuniController;
+use App\Http\Controllers\ReservasiController;
+use App\Http\Controllers\TipeProdukKamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +40,9 @@ Route::middleware(['auth', 'checkrole:0'])->group(function() {
     Route::resource('/produk', ProdukController::class);
     Route::resource('/produkdetail', ProdukDetailController::class);
     Route::resource('/history', HistoryController::class);
+    Route::post('/produk/reservasi', [ProdukDetailController::class, 'store'])->name('produkdetail.store');
+    Route::get('/produkdetail/checkout/{id}', [ProdukDetailController::class, 'checkout'])->name('produkdetail.checkout');
+    Route::post('/produkdetail/checkout/{id}/upload', [ProdukDetailController::class, 'uploadBuktiPembayaran'])->name('produkdetail.uploadBuktiPembayaran');
 });
 
 //Admin
@@ -58,8 +64,15 @@ Route::middleware(['auth', 'checkrole:1'])->group(function() {
             Route::resource("/kamar", KamarController::class);
         });
 
+        Route::prefix("produk")->group(function () {
+            Route::resource("/tipeprodukkamar", TipeProdukKamarController::class);
+            Route::resource("/produkkamar", ProdukKamarController::class);
+        });
+
         Route::prefix("datapenghuni")->group(function () {
-            Route::resource("/penghuni", DaftarPenghuniController::class);
+            Route::resource("/penghuni", ReservasiController::class);
+            Route::post("/verifikasi/{id}", [ReservasiController::class, 'verifikasi'])->name('verifikasi');
+            Route::post('/verifikasi/{id}', 'ReservasiController@verifikasi')->name('verifikasi.reservasi');
         });
 
         Route::prefix("pembayaran")->group(function () {
@@ -70,5 +83,9 @@ Route::middleware(['auth', 'checkrole:1'])->group(function() {
             Route::resource("/laporan", LaporanController::class);
         });
     });
+
 });
 
+Route::get('payment', function(){
+    return view('pengguna.payment.index');
+});

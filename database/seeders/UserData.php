@@ -27,10 +27,10 @@ class UserData extends Seeder
                 'email' => 'aurora@gmail.com'
             ],
             [
-                'name' => 'Irfan Pratama',
+                'name' => 'Penghuni',
                 'password' => bcrypt('penghuni'),
                 'level' => 0,
-                'email' => 'irfan@gmail.com'
+                'email' => 'penghuni@gmail.com'
             ],
         ];
 

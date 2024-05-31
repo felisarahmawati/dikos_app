@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kamar;
-use App\Models\tipekamar;
+use App\Models\Tipekamar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class KamarController extends Controller
 {
@@ -18,7 +17,7 @@ class KamarController extends Controller
     {
         // Ambil data kamar dari model Kamar
         $kamar = Kamar::with('tipekamar')->get();
-        $tipekamar = tipekamar::get();
+        $tipekamar = Tipekamar::get();
 
         return view("admin.kamar.index", compact('kamar','tipekamar'));
     }
@@ -38,21 +37,20 @@ class KamarController extends Controller
     {
         // Lakukan validasi input
         $this->validate($request, [
-            "tipekamar_id" => 'required',
-            "nomor_kamar" => [
-                'required',
-                Rule::unique('kamars', 'nomor_kamar')->where('tipekamar_id', $request->tipekamar_id),
-            ],
+            "tipekamar_id" => 'required|exists:tipekamar,id',
             "gambar" => 'required|mimes:jpg,jpeg,png',
             "deskripsi" => 'required',
+            "stok" => 'required|integer|min:1',
         ],
         [
             "tipekamar_id.required" => 'Tipe kamar harus diisi',
-            "nomor_kamar.required" => 'Nomor kamar harus diisi',
-            "nomor_kamar.unique" => 'Nomor kamar sudah digunakan untuk tipe kamar tersebut!',
             "gambar.required" => 'Gambar harus diisi',
             "deskripsi.required" => 'Deskripsi harus diisi',
+            "stok.required" => 'Stok kamar harus diisi',
+            "stok.integer" => 'Stok kamar harus berupa angka',
+            "stok.min" => 'Stok kamar minimal 1',
         ]);
+
 
         // Lanjutkan dengan menyimpan data jika validasi berhasil
         if ($request->hasFile('gambar')) {
@@ -62,28 +60,34 @@ class KamarController extends Controller
             return back()->with(['gagal' => 'Tidak ada file yang diunggah!']);
         }
 
-        $kamar = Kamar::create([
-            "tipekamar_id" => $request->tipekamar_id,
-            "nomor_kamar" => $request->nomor_kamar,
-            "gambar" => $gambarKamarPath,
-            "deskripsi" => $request->deskripsi,
-        ]);
+        // Tambahkan beberapa kamar berdasarkan stok
+        $tipekamar_id = $request->tipekamar_id;
+        $deskripsi = $request->deskripsi;
+        $stok = $request->stok;
 
-        // Tambahkan pesan berhasil atau gagal
-        if ($kamar) {
-            return redirect()->route('kamar.index')->with('berhasil', 'Kamar baru telah ditambahkan');
-        } else {
-            return redirect()->route('kamar.index')->with('gagal', 'Kamar baru gagal ditambahkan');
+        for ($i = 0; $i < $stok; $i++) {
+            // Generate nomor kamar
+            $nomor_kamar = Kamar::generateNomorKamar($tipekamar_id);
+
+            // Buat Kamar baru
+            Kamar::create([
+                "tipekamar_id" => $tipekamar_id,
+                "nomor_kamar" => $nomor_kamar,
+                "gambar" => $gambarKamarPath,
+                "deskripsi" => $deskripsi,
+                "stok" => 1, // Set stok 1 untuk setiap kamar individu
+            ]);
         }
-    }
 
+        return redirect()->route('kamar.index')->with('berhasil', 'Kamar baru telah ditambahkan');
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $tipeKamar = tipekamar::with('kamars')->findOrFail($id);
+        $tipeKamar = Tipekamar::with('kamars')->findOrFail($id);
         return view('pengguna.layouts_user.detail', compact('tipeKamar'));
     }
 
@@ -102,7 +106,10 @@ class KamarController extends Controller
     {
         $this->validate($request, [
             'tipekamar_id' => 'required',
-            'nomor_kamar' => 'required',
+            'nomor_kamar' => [
+                'required',
+                Rule::unique('kamars')->ignore($id)->where('tipekamar_id', $request->tipekamar_id),
+            ],
             'deskripsi' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -125,7 +132,6 @@ class KamarController extends Controller
             return redirect()->route('kamar.index')->with('gagal', 'Kamar gagal diperbarui');
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
