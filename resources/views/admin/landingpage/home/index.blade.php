@@ -111,22 +111,17 @@
                         <!-- Input teks 1 -->
                         <div class="form-group">
                             <label for="teks1">Teks 1</label>
-                            <input type="text" class="form-control" name="teks1" id="teks1"
-                                placeholder="Masukkan teks1" @error('teks1') is-invalid @enderror
-                                value="{{ old('teks1') }}">
+                            <textarea class="form-control" name="teks1" id="teks1" placeholder="Masukkan teks1" rows="4">@error('teks1') is-invalid @enderror{{ old('teks1') }}</textarea>
                             @error('teks1')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <!-- Input teks 2 -->
-                        <!-- Input teks 2 -->
                         <div class="form-group">
                             <label for="teks2">Teks 2</label>
-                            <input type="text" class="form-control" name="teks2" id="teks2"
-                                placeholder="Masukkan teks2" @error('teks2') is-invalid @enderror
-                                value="{{ old('teks2') }}">
+                            <textarea class="form-control" name="teks2" id="teks2" placeholder="Masukkan teks2" rows="4">@error('teks2') is-invalid @enderror{{ old('teks2') }}</textarea>
                             @error('teks2')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                            <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>

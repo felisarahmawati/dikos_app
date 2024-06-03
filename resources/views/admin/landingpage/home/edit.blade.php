@@ -22,11 +22,10 @@
                         </div>
                         <div class="form-group">
                             <label for="teks1">Teks 1</label>
-                            <input type="text" class="form-control" name="teks1" id="teks1"
-                                value="{{ $item->teks1 }}">
+                            <textarea class="form-control" name="teks1" id="teks1" rows="3" value="{{ $item->teks1 }}">{{ $item->teks1 }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="teks2">Teks 1</label>
+                            <label for="teks2">Teks 2</label>
                             <textarea class="form-control" name="teks2" id="teks2" rows="3" value="{{ $item->teks2 }}">{{ $item->teks2 }}</textarea>
                         </div>
                     </div>

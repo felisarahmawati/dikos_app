@@ -160,6 +160,5 @@
             });
         });
     });
-    </script>
-
+</script>
 @endsection
