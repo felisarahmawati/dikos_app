@@ -19,7 +19,7 @@
                         <img src="{{ Storage::url($item->gambar) }}" alt="{{ $item->id }}" class="img-fluid" />
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                        <b><p class="text mt-2">Stok yang tersedia: {{ $item->stok }}</p></b>
+                        <b><p class="text mt-2">Booking yang tersedia: {{ $item->stok }}</p></b>
                         <b><p class="text mt-2">{{ $item->tipeproduk->harga }}/bulan</p></b>
                         <p>{{ $item->deskripsi }}</p>
                         <b><p class="text mt-2">Fasilitas Kamar</p></b>
@@ -45,7 +45,7 @@
                         @if ($item->stok > 0)
                             <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#exampleModalBooking{{ $item->id }}"><span>Booking Sekarang!</span></a>
                         @else
-                            <p class="text-danger">Stok habis</p>
+                            <p class="text-danger">Booking penuh!</p>
                         @endif
                     </div>
 

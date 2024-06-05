@@ -17,7 +17,7 @@
                     <tr>
                         <th scope="col">Nama</th>
                         <th scope="col">No HP</th>
-                        <th scope="col">Alamat</th>
+                        <th scope="col">Pesan</th>
                         <th scope="col">Status Konfirmasi</th>
                         <th scope="col">Detail</th>
                     </tr>
@@ -27,9 +27,9 @@
                     <tr>
                         <td>{{ $reservation->nama }}</td>
                         <td>{{ $reservation->nohp }}</td>
-                        <td>{{ $reservation->alamat }}</td>
+                        <td>{{ $reservation->pesan }}</td>
                         <td>
-                            @if($reservation->status_konfirmasi)
+                            @if($reservation->buktiPembayaran?->status_konfirmasi)
                                 <span class="badge bg-success">Dikonfirmasi</span>
                             @else
                                 <span class="badge bg-warning">Menunggu Konfirmasi</span>

@@ -9,26 +9,29 @@ class ReservasiController extends Controller
 {
     public function index()
     {
-        $reservasi = Reservasi::all();
+        $reservasi = Reservasi::with('user', 'buktiPembayaran')->paginate(5);
 
         return view('admin.datapenghuni.index', compact('reservasi'));
     }
 
-    public function verifikasi(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $reservasi = Reservasi::findOrFail($id);
 
         // Lakukan validasi jika reservasi sudah diverifikasi sebelumnya
-        if ($reservasi->status_konfirmasi) {
-            return response()->json(['error' => 'Reservasi sudah diverifikasi sebelumnya.']);
+        if ($reservasi->buktiPembayaran && $reservasi->buktiPembayaran->status_konfirmasi) {
+            return redirect()->back()->withErrors(['error' => 'Reservasi sudah diverifikasi sebelumnya.']);
         }
 
         // Lakukan verifikasi dan simpan pesan verifikasi
-        $reservasi->status_konfirmasi = true;
-        $reservasi->pesan_verifikasi = $request->pesan;
+        if ($reservasi->buktiPembayaran) {
+            $reservasi->buktiPembayaran->status_konfirmasi = true;
+            $reservasi->buktiPembayaran->pesan = $request->pesan_verifikasi; // Simpan pesan verifikasi
+            $reservasi->buktiPembayaran->save();
+        }
+
         $reservasi->save();
 
-        return response()->json(['message' => 'Reservasi berhasil diverifikasi.']);
+        return redirect()->route('penghuni.index')->with('message', 'Reservasi berhasil diverifikasi.');
     }
-
 }

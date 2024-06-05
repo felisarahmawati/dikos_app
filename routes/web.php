@@ -43,6 +43,7 @@ Route::middleware(['auth', 'checkrole:0'])->group(function() {
     Route::post('/produk/reservasi', [ProdukDetailController::class, 'store'])->name('produkdetail.store');
     Route::get('/produkdetail/checkout/{id}', [ProdukDetailController::class, 'checkout'])->name('produkdetail.checkout');
     Route::post('/produkdetail/checkout/{id}/upload', [ProdukDetailController::class, 'uploadBuktiPembayaran'])->name('produkdetail.uploadBuktiPembayaran');
+
 });
 
 //Admin
@@ -70,13 +71,16 @@ Route::middleware(['auth', 'checkrole:1'])->group(function() {
         });
 
         Route::prefix("datapenghuni")->group(function () {
-            Route::resource("/penghuni", ReservasiController::class);
-            Route::post("/verifikasi/{id}", [ReservasiController::class, 'verifikasi'])->name('verifikasi');
-            Route::post('/verifikasi/{id}', 'ReservasiController@verifikasi')->name('verifikasi.reservasi');
+            Route::resource('penghuni', ReservasiController::class);
+            // web.php
+            Route::put('/penghuni/{reservasi}', [ReservasiController::class, 'update'])->name('penghuni.update');
+
         });
+
 
         Route::prefix("pembayaran")->group(function () {
             Route::resource("/pembayaran", PembayaranController::class);
+            
         });
 
         Route::prefix("laporan")->group(function () {

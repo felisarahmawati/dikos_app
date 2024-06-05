@@ -8,9 +8,6 @@
 <div class="container pt-5">
     <section id="checkout" class="checkout section">
         <div class="row">
-            <div class="col-md-12">
-                <a href="{{ url('history') }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali</a>
-            </div>
             <div class="col-md-12 mt-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -22,6 +19,11 @@
             </div>
             <div class="col-md-12">
                 <div class="card">
+                    @if (session('berhasil'))
+                        <div class="alert alert-success">
+                            {{ session('berhasil') }}
+                        </div>
+                    @endif
                     <div class="card-body">
                         <h4>Sukses Check Out</h4>
                         <p>Booking kamar berhasil selanjutnya untuk pembayaran silahkan transfer di rekening <strong>Bank MANDIRI Nomer Rekening : 134-00-1482176-2</strong> dengan nominal : <strong>Rp. {{ number_format($reservasi->total) }}</strong></p>
@@ -74,3 +76,4 @@
     </section>
 </div>
 @endsection
+

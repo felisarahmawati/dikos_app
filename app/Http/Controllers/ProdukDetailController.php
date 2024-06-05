@@ -108,6 +108,7 @@ class ProdukDetailController extends Controller
         $buktiPembayaran->status_konfirmasi = false; // Menunggu konfirmasi admin
         $buktiPembayaran->save();
 
-        return redirect()->route('produkdetail.checkout', $reservasi->id)->with('status', 'Bukti pembayaran berhasil diunggah, menunggu konfirmasi.');
+        return redirect()->route('produkdetail.checkout', $reservasi->id)->with('berhasil', 'Bukti pembayaran berhasil diunggah, menunggu konfirmasi.');
     }
+
 }

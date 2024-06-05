@@ -98,12 +98,14 @@ class ProdukKamarController extends Controller
         $this->validate($request, [
             'tipeproduk_id' => 'required',
             'deskripsi' => 'required',
+            'stok' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $produk = Produk::find($id);
         $produk->tipeproduk_id = $request->tipeproduk_id;
         $produk->deskripsi = $request->deskripsi;
+        $produk->stok = $request->stok;
 
         if ($request->hasFile('gambar')) {
             $imagePath = $request->file('gambar')->store('uploads', 'public');
