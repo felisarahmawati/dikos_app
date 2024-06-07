@@ -27,12 +27,12 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <form action="{{ url()->current() }}" method="GET">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="search" placeholder="Cari Nama Penghuni">
-                                        <ion-icon name="search-outline"></ion-icon>
-                                </div>
-                            </form>
+                            <div class="search2" style="margin-top: 10px;">
+                                <label>
+                                    <input type="text" id="searchInput" placeholder="Cari Disini">
+                                    <ion-icon name="search-outline"></ion-icon>
+                                </label>
+                            </div>
                         </div>
                         <!-- Tabel -->
                         <div class="table-responsive">
@@ -45,7 +45,7 @@
                                             <th class="text-center">Nama Penghuni</th>
                                             <th class="text-center">Tanggal</th>
                                             <th class="text-center">Bukti Transfer</th>
-                                            <th class="text-center">Status Bayar</th>
+                                            <th class="text-center">Keterangan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -63,9 +63,12 @@
                                                     <span class="text-danger">Tidak ada bukti pembayaran</span>
                                                 @endif
                                             </td>
-                                            <td></td>
+                                            <td class="text-center">{{ $reservation->buktiPembayaran->keterangan }}</td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary mx-2" data-bs-toggle="modal" href="#exampleModalEdit{{ $reservation->id }}" role="button">
+                                                        <i class="bi bi-pencil-square"></i> Edit
+                                                    </a>
                                                     <a class="btn btn-warning mx-2" data-bs-toggle="modal" href="#exampleModalEdit{{ $reservation->id }}" role="button">
                                                         <i class="bi bi-pencil-square"></i> Detail
                                                     </a>
@@ -83,6 +86,7 @@
         </div>
     </div>
 
+    @include('admin.pembayaran.edit')
     <!-- Modal Tambah Pembayaran -->
     <div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -107,11 +111,6 @@
                         <div class="mb-3">
                             <label for="tanggal_masuk_uang" class="form-label">Tanggal Masuk Uang</label>
                             <input type="date" class="form-control" id="tanggal_masuk_uang" name="tanggal_masuk_uang" required>
-                        </div>
-                        <!-- Input Jumlah Uang -->
-                        <div class="mb-3">
-                            <label for="jumlah_uang" class="form-label">Jumlah Uang</label>
-                            <input type="number" class="form-control" id="jumlah_uang" name="jumlah_uang" required>
                         </div>
                         <!-- Input Bukti Transfer -->
                         <div class="mb-3">

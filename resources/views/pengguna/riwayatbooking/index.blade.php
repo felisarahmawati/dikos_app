@@ -27,7 +27,7 @@
                     <tr>
                         <td>{{ $reservation->nama }}</td>
                         <td>{{ $reservation->nohp }}</td>
-                        <td>{{ $reservation->pesan }}</td>
+                        <td>{{ $reservation->pesan ?: '-' }}</td>
                         <td>
                             @if($reservation->buktiPembayaran?->status_konfirmasi)
                                 <span class="badge bg-success">Dikonfirmasi</span>
