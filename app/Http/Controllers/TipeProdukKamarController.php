@@ -34,15 +34,6 @@ class TipeProdukKamarController extends Controller
         }
     }
 
-    // public function edit(Request $request)
-    // {
-    //     $data = [
-    //         "edit" => Kategori::where("id", $request->id)->first(),
-    //     ];
-
-    //     return view("admin.kategori.edit", $data);
-    // }
-
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -65,7 +56,6 @@ class TipeProdukKamarController extends Controller
             return redirect()->route('tipeprodukkamar.index')->with('gagal', 'Tipe Produk gagal diperbarui');
         }
     }
-
 
     public function destroy($id)
     {

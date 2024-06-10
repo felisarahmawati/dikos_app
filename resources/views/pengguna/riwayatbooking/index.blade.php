@@ -25,9 +25,9 @@
                 <tbody>
                     @forelse($reservasi as $reservation)
                     <tr>
-                        <td>{{ $reservation->nama }}</td>
+                        <td>{{ $reservation->user->name }}</td>
                         <td>{{ $reservation->nohp }}</td>
-                        <td>{{ $reservation->pesan ?: '-' }}</td>
+                        <td>{{ $reservation->buktiPembayaran ?->pesan ?: '-'  }}</td>
                         <td>
                             @if($reservation->buktiPembayaran?->status_konfirmasi)
                                 <span class="badge bg-success">Dikonfirmasi</span>
@@ -61,7 +61,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h6><strong>Informasi Pemesan</strong></h6>
-                        <p><strong>Nama:</strong> {{ $reservation->nama }}</p>
+                        <p><strong>Nama:</strong> {{ $reservation->user->name }}</p>
                         <p><strong>No HP:</strong> {{ $reservation->nohp }}</p>
                         <p><strong>Alamat:</strong> {{ $reservation->alamat }}</p>
                         <p><strong>Jenis Kelamin:</strong> {{ $reservation->jenis_kelamin }}</p>

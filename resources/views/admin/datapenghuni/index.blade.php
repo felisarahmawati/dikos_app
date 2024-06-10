@@ -45,9 +45,8 @@
                                         <th class="text-center">Nama</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">No Telp</th>
-                                        <th class="text-center">Kamar</th>
-                                        <th class="text-center">Total Pembayaran</th>
                                         <th class="text-center">DP</th>
+                                        <th class="text-center">Total Pembayaran</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Pesan</th>
                                         <th class="text-center">Aksi</th>
@@ -64,12 +63,11 @@
                                                 <span class="text-danger">Tidak ada bukti pembayaran</span>
                                             @endif
                                         </td>
-                                        <td class="text-justify">{{ $reservation->nama }}</td>
+                                        <td class="text-justify">{{ $reservation->user->name }}</td>
                                         <td class="text-justify">{{ $reservation->user->email }}</td>
                                         <td class="text-justify">{{ $reservation->nohp }}</td>
-                                        <td class="text-justify">{{ $reservation->nama }}</td>
-                                        <td class="text-justify">Rp {{ number_format($reservation->total, 0, ',', '.') }}</td>
                                         <td class="text-justify">Rp {{ number_format($reservation->dp, 0, ',', '.') }}</td>
+                                        <td class="text-justify">Rp {{ number_format($reservation->total, 0, ',', '.') }}</td>
                                         <td class="text-center">
                                             @if($reservation->buktiPembayaran?->status_konfirmasi)
                                                 <span class="badge bg-success">Dikonfirmasi</span>

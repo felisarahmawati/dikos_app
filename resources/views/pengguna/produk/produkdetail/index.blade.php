@@ -60,16 +60,14 @@
                                 <form action="{{ route('produkdetail.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="produk_id" value="{{ $item->id }}">
+                                    <input type="hidden" name="user_id" value="{{ auth()->id() }}"> <!-- Input user_id tersembunyi -->
                                     <div class="modal-body">
                                         <div class="row">
                                             <!-- Input Nama -->
                                             <div class="col-sm-6">
                                                 <div class="mb-3">
                                                     <label for="nama">Nama</label>
-                                                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="{{ old('nama') }}">
-                                                    @error('nama')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
+                                                    <input type="text" class="form-control" id="nama" value="{{ auth()->user()->name }}" readonly>
                                                 </div>
                                             </div>
                                             <!-- Input No Hp -->

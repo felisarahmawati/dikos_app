@@ -26,7 +26,7 @@
                     @endif
                     <div class="card-body">
                         <h4>Sukses Check Out</h4>
-                        <p>Booking kamar berhasil selanjutnya untuk pembayaran silahkan transfer di rekening <strong>Bank MANDIRI Nomer Rekening : 134-00-1482176-2</strong> dengan nominal : <strong>Rp. {{ number_format($reservasi->total) }}</strong></p>
+                        <p>Booking kamar berhasil selanjutnya untuk pembayaran DP silahkan transfer di rekening <strong>Bank MANDIRI Nomer Rekening : 134-00-1482176-2</strong> dengan nominal : <strong>Rp. {{ number_format($reservasi->dp) }}</strong></p>
                     </div>
                 </div>
                 <div class="card mt-2">
@@ -46,7 +46,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-center">1</td>
-                                        <td class="text-center">{{ $reservasi->nama }}</td>
+                                        <td class="text-center">{{ $reservasi->user->name }}</td>
                                         <td class="text-center">Rp. {{ number_format($reservasi->dp) }}</td>
                                         <td class="text-center">{{ $reservasi->lama_sewa }} bulan</td>
                                         <td class="text-right">Rp. {{ number_format($reservasi->total) }}</td>

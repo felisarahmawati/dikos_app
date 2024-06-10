@@ -120,7 +120,7 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="gambar">Gambar</label>
-                                <input type="file" name="gambar" id="gambar" class="form-control">
+                                <input type="file" name="gambar" id="gambar" class="form-control" required>
                             </div>
                         </div><!-- Col -->
                     </div>
@@ -129,7 +129,7 @@
                             <div class="mb-3">
                                 <label class="tipeproduk">Tipe produk</label>
                                 <div>
-                                    <select class="form-select" name="tipeproduk_id" id="tipeproduk_id" style="width: 100%">
+                                    <select class="form-select" name="tipeproduk_id" id="tipeproduk_id" style="width: 100%" required>
                                         <option value="">-- Pilih --</option>
                                         @if ($tipeproduk)
                                             @foreach ($tipeproduk as $sdata)
@@ -145,7 +145,7 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="harga">Harga</label>
-                                <select class="form-select" name="tipeproduk_id" id="tipeproduk_id" style="width: 100%">
+                                <select class="form-select" name="tipeproduk_id" id="tipeproduk_id" style="width: 100%" required>
                                     <option value="">-- Pilih --</option>
                                     @if ($tipeproduk)
                                         @foreach ($tipeproduk as $sdata)
@@ -168,7 +168,7 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="deskripsi">Deskripsi</label>
-                                <input type="text" name="deskripsi" class="form-control" placeholder="Masukkan Deskripsi">
+                                <input type="text" name="deskripsi" class="form-control" placeholder="Masukkan Deskripsi" required>
                             </div>
                         </div><!-- Col -->
                     </div>

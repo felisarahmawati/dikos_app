@@ -11,11 +11,16 @@ class BuktiPembayaran extends Model
 
     protected $table = 'buktipembayarans';
 
-    protected $fillable = ['user_id', 'tanggal_masuk_uang', 'jumlah_uang', 'keterangan', 'bukti_pembayaran'];
+    protected $guarded = [' '];
+
 
     public function reservasi()
     {
         return $this->belongsTo(Reservasi::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

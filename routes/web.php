@@ -1,21 +1,19 @@
 <?php
 
+use App\Http\Controllers\BayarBulananController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\KamarController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\TipeKamarController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProdukKamarController;
 use App\Http\Controllers\ProdukDetailController;
 use App\Http\Controllers\TampilanHomeController;
 use App\Http\Controllers\TampilanAboutController;
-use App\Http\Controllers\DaftarPenghuniController;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\TipeProdukKamarController;
 
@@ -60,10 +58,6 @@ Route::middleware(['auth', 'checkrole:1'])->group(function() {
                 Route::resource("/about", TampilanAboutController::class);
             });
         });
-        Route::prefix("kamar")->group(function () {
-            Route::resource("/tipekamar", TipeKamarController::class);
-            Route::resource("/kamar", KamarController::class);
-        });
 
         Route::prefix("produk")->group(function () {
             Route::resource("/tipeprodukkamar", TipeProdukKamarController::class);
@@ -72,24 +66,26 @@ Route::middleware(['auth', 'checkrole:1'])->group(function() {
 
         Route::prefix("datapenghuni")->group(function () {
             Route::resource('penghuni', ReservasiController::class);
-            // web.php
             Route::put('/penghuni/{reservasi}', [ReservasiController::class, 'update'])->name('penghuni.update');
 
         });
 
-
         Route::prefix("pembayaran")->group(function () {
             Route::resource("/pembayaran", PembayaranController::class);
-            
+            Route::prefix("bayarbulanan")->group(function () {
+                Route::resource('pembayaran/bayarbulanan', BayarBulananController::class);
+            });
         });
 
         Route::prefix("laporan")->group(function () {
             Route::resource("/laporan", LaporanController::class);
+            Route::get('/export-csv', [LaporanController::class, 'exportCsv'])->name('laporan.exportCsv');
+            Route::get('/export-pdf', [LaporanController::class, 'exportPdf'])->name('laporan.exportPdf');
         });
+
+        // routes/web.php
+        Route::get('/admin/laporan/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.pdf');
+
     });
 
-});
-
-Route::get('payment', function(){
-    return view('pengguna.payment.index');
 });

@@ -15,14 +15,19 @@ class Reservasi extends Model
 
     public function produk()
     {
-        return $this->hasMany(Produk::class, 'tipe_produk_id');
+        return $this->belongsTo(Produk::class, 'produk_id');
+    }
+
+    public function tipeproduk()
+    {
+        return $this->belongsTo(TipeProduk::class, 'tipeproduk_id', 'id');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function buktiPembayaran()
     {
         return $this->hasOne(BuktiPembayaran::class);

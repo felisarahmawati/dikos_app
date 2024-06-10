@@ -15,9 +15,7 @@ class HistoryController extends Controller
     {
         $userId = Auth::id();
 
-        // $reservasi = Reservasi::where('user_id', $userId)->get();
-        $reservasi = Reservasi::with('user', 'buktiPembayaran')->paginate(5);
-
+        $reservasi = Reservasi::where('user_id', $userId)->get();
 
         return view('pengguna.riwayatbooking.index', compact("reservasi"));
     }

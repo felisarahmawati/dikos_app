@@ -16,7 +16,7 @@
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama Penghuni</label>
                                 <input type="nama" class="form-control" id="nama"
-                                    value="{{ $reservation->nama }}" readonly>
+                                    value="{{ $reservation->user->name }}" readonly>
                                 <label for="nohp" class="form-label">Nomor Telepon</label>
                                 <input type="nohp" class="form-control" id="nohp"
                                     value="{{ $reservation->nohp }}" readonly>

@@ -28,7 +28,6 @@ class ProdukDetailController extends Controller
     {
         // Validasi data
         $validatedData = $request->validate([
-            'nama' => 'required|string|max:255',
             'nohp' => 'required|numeric',
             'alamat' => 'required|string',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
@@ -47,7 +46,6 @@ class ProdukDetailController extends Controller
 
         // Simpan data reservasi ke database
         $reservasi = new Reservasi();
-        $reservasi->nama = $validatedData['nama'];
         $reservasi->nohp = $validatedData['nohp'];
         $reservasi->alamat = $validatedData['alamat'];
         $reservasi->jenis_kelamin = $validatedData['jenis_kelamin'];

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,15 @@ class MainController extends Controller
         if (Auth::check() && Auth::user()->checkrole == '1') {
             return redirect()->intended('dashboard');
         }
-        return view('admin.layouts.content');
+
+        $totalStok = Produk::sum('stok');
+        $jumlahPenghuni = User::where('level', 0)->count();
+        // $totalLaporan = Laporan::count(); // Asumsikan Anda memiliki model Laporan
+
+
+        return view('admin.layouts.content', compact(
+            'totalStok', 'jumlahPenghuni'
+        ));
     }
 
     /**

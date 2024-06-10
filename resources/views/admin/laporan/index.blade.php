@@ -8,7 +8,7 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Table</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data Laporan</li>
+                <li class="breadcrumb-item active" aria-current="page">Data Laporan Pemesanan</li>
             </ol>
         </nav>
 
@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <!-- Judul dan tombol tambah -->
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="card-title mb-0">Data Laporan</h6>
+                            <h6 class="card-title mb-0">Data Laporan Pemesanan</h6>
                         </div>
                         <!-- Tabel -->
                         <div class="table-responsive">
@@ -32,14 +32,12 @@
                                         </h6>
                                     </div>
                                     <div class="mx-3 my-3">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exportCustom">
+                                        <a href="{{ route('laporan.exportCsv') }}" class="btn btn-primary">
                                             Export Laporan Penghuni Excel .CSV
-                                        </button>
-                                        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
-                                            data-bs-target="#pdfCustom">
+                                        </a>
+                                        <a href="{{ route('laporan.exportPdf') }}" class="btn btn-primary mx-2">
                                             PDF Laporan Penghuni
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -48,16 +46,24 @@
                                     <!-- Kolom tabel -->
                                     <thead>
                                         <tr>
-                                            <th class="text-center">No.</th>
-                                            <th class="text-center">Nama Penghuni</th>
-                                            <th class="text-center">Tanggal</th>
-                                            <th class="text-center">Bukti Transfer</th>
-                                            <th class="text-center">Aksi</th>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Tanggal Pemesanan</th>
+                                            <th class="text-center">Nama Penyewa</th>
+                                            <th class="text-center">Durasi Sewa</th>
+                                            <th class="text-center">Status Pemesanan</th>
                                         </tr>
                                     </thead>
                                     <!-- Isi tabel -->
                                     <tbody>
-                                       
+                                        @foreach ($laporan as $data)
+                                            <tr>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                <td class="text-center">{{ $data->created_at->format('Y-m-d') }}</td>
+                                                <td class="text-center">{{ $data->user->name }}</td>
+                                                <td class="text-center">{{ $data->lama_sewa }} bulan</td>
+                                                <td class="text-center">{{ $data->buktiPembayaran->status_konfirmasi ? 'Terkonfirmasi' : 'Belum Dikonfirmasi' }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
