@@ -57,8 +57,8 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center"><img src="{{ Storage::url($item->gambar) }}"
                                                     style="width: 25%;"></td>
-                                            <td class="text-center">{{ $item->teks1 }}</td>
-                                            <td class="text-center">{{ $item->teks2 }}</td>
+                                            <td class="text-center">{!! html_entity_decode($item->teks1) !!}</td>
+                                            <td class="text-center">{!! html_entity_decode($item->teks2) !!}</td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center">
                                                     <a class="btn btn-primary mx-2" data-bs-toggle="modal"
@@ -106,7 +106,7 @@
                         <!-- Input gambar -->
                         <div class="form-group">
                             <label for="gambar"> Gambar </label>
-                            <input type="file" class="form-control" name="gambar" id="gambar">
+                            <input type="file" name="gambar" id="gambar" class="form-control" required>
                         </div>
                         <!-- Input teks 1 -->
                         <div class="form-group">
@@ -135,3 +135,18 @@
         </div>
     </div>
 @endsection
+@push('page-scripts')
+<script src="{{ asset('assets_admin/ckeditor/ckeditor.js') }}"></script>
+<script>
+        $(function() {
+            CKEDITOR.replace('teks1')
+            console.log("ADA");
+        })
+</script>
+<script>
+        $(function() {
+            CKEDITOR.replace('teks2')
+            console.log("ADA");
+        })
+</script>
+@endpush

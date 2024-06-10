@@ -70,7 +70,7 @@
                                             <td class="text-justify">{{ $data->tipeproduk->tipe_produk }}</td>
                                             <td class="text-justify"><img src="{{ Storage::url($data->gambar) }}"
                                                 style="width: 50%;" style="height: 50%;"></td>
-                                            <td class="text-justify">{{ $data->deskripsi }}</td>
+                                            <td class="text-justify">{!! html_entity_decode($data->deskripsi) !!}</td>
                                             <td class="text-justify">{{ $data->tipeproduk->harga }}</td>
                                             <td class="text-justify">{{ $data->stok }}</td>
                                             <td class="text-center">
@@ -164,13 +164,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="mb-3">
-                                <label class="deskripsi">Deskripsi</label>
-                                <input type="text" name="deskripsi" class="form-control" placeholder="Masukkan Deskripsi" required>
-                            </div>
-                        </div><!-- Col -->
+                    <div class="form-group">
+                            <label for="deskripsi">Deskripsi</label>
+                            <textarea class="form-control" name="deskripsi" id="deskripsi" placeholder="Masukkan deskripsi" rows="4">@error('deskripsi') is-invalid @enderror{{ old('deskripsi') }}</textarea>
+                            @error('deskripsi')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                     </div>
                 </div>
                 <!-- Tombol simpan dan batal -->
@@ -204,3 +203,12 @@
     });
 </script>
 
+@push('page-scripts')
+<script src="{{ asset('assets_admin/ckeditor/ckeditor.js') }}"></script>
+<script>
+        $(function() {
+            CKEDITOR.replace('deskripsi')
+            console.log("ADA");
+        })
+</script>
+@endpush

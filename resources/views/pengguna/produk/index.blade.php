@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                         <b><p class="text mt-5">{{ $item->tipeproduk->harga }}/bulan</p></b>
-                        <p class="text-justify">{{ $item->deskripsi }}</p>
+                        <p class="text-justify">{!! html_entity_decode($item->deskripsi) !!}</p>
                         <a href="{{ route('produkdetail.index') }}" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
                     </div>
                 @empty

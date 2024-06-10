@@ -21,7 +21,7 @@
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                         <b><p class="text mt-2">Booking yang tersedia: {{ $item->stok }}</p></b>
                         <b><p class="text mt-2">{{ $item->tipeproduk->harga }}/bulan</p></b>
-                        <p>{{ $item->deskripsi }}</p>
+                        <p>{!! html_entity_decode($item->deskripsi) !!}</p>
                         <b><p class="text mt-2">Fasilitas Kamar</p></b>
                         <div class="facilities">
                             <ul>

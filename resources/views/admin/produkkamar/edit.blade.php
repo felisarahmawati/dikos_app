@@ -57,17 +57,26 @@
                             <div class="col-sm-12">
                                 <div class="mb-3">
                                     <label class="deskripsi">Deskripsi</label>
-                                    <input type="text" name="deskripsi" class="form-control" value="{{ $item->deskripsi }}">
+                                    <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3" value="{{ $item->deskripsi }}">{{ $item->deskripsi }}</textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer d-md-block">
                         <button type="submit" class="btn btn-success btn-sm">Simpan</button>
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Batal</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 @endforeach
+@push('page-scripts')
+<script src="{{ asset('assets_admin/ckeditor/ckeditor.js') }}"></script>
+<script>
+        $(function() {
+            CKEDITOR.replace('deskripsi')
+            console.log("ADA");
+        })
+</script>
+@endpush

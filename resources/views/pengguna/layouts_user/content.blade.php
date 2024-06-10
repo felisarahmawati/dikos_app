@@ -12,8 +12,8 @@
             <div class="row gy-4">
                 <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
                     @forelse ($home as $item)
-                        <h1>{{ $item->teks1 }}</h1>
-                        <p>{{ $item->teks2 }}</p>
+                        <h1>{!! html_entity_decode($item->teks1) !!}</h1>
+                        <p>{!! html_entity_decode($item->teks2) !!}</p>
                     @empty
                         <h1 class="">Welcome to Dikos</h1>
                         <p class="text-justify">Dikos adalah sebuah platform digital yang dirancang untuk memudahkan proses pencarian dan pemesanan kosan bagi masyarakat yang ingin mencari kosan</p>
@@ -44,11 +44,10 @@
         <div class="container">
             <div class="row gy-4">
                 @forelse ($about as $item)
-                    <p>{{ $item->teks1 }}</p>
+                    <p>{!! html_entity_decode($item->teks1) !!}</p>
                 @empty
                     <p>Selamat datang di Aplikasi Dikos! Di sini, kami tidak hanya membantu Anda menemukan kosan sesuai dengan preferensi lokasi, fasilitas, dan budget Anda, tetapi juga menyediakan pengalaman menyenangkan dan praktis dalam proses pencarian dan pemesanan.</p>
                 @endforelse
-                <!-- <p></p> -->
                 <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
                     @forelse ($about as $item)
                         <img src="{{ Storage::url($item->gambar) }}" alt="img_about" class="img-fluid" />
@@ -58,17 +57,7 @@
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                         @forelse ($about as $item)
-                        <h3>Mengapa memilih Aplikasi Dikos?</h3>
-
-                        <ul>
-                            <li><i class="bi bi-check2-circle"></i><span>Pencarian yang Mudah: Temukan kosan impian Anda dengan mudah berdasarkan lokasi yang Anda inginkan, fasilitas yang Anda butuhkan, dan budget yang Anda miliki.</span></li>
-                            <li><i class="bi bi-check2-circle"></i><span>Informasi Terperinci: Dapatkan informasi yang terperinci mengenai setiap kosan, termasuk foto-foto dan detail harga, sehingga Anda dapat membuat keputusan yang tepat.</span></li>
-                            <li><i class="bi bi-check2-circle"></i><span>Proses Pemesanan yang Praktis: Pesan kamar pilihan Anda hanya dalam beberapa langkah mudah, tanpa ribet.</span></li>
-                            <li><i class="bi bi-check2-circle"></i><span>Keamanan Pembayaran: Lakukan pembayaran langsung melalui aplikasi dengan aman dan praktis. Kami mengutamakan keamanan transaksi Anda.</span></li>
-                            <li><i class="bi bi-check2-circle"></i><span>Komitmen pada Kepuasan Pengguna: Kami berkomitmen untuk memberikan pengalaman terbaik bagi pengguna kami, dari awal hingga akhir. Kepuasan Anda adalah prioritas kami.</span></li>
-                        </ul>
-
-                        <p class="text-justify">{{ $item->teks2 }}</p>
+                        <p class="text-justify">{!! html_entity_decode($item->teks2) !!}</p>
                         @empty
                         <h3>Mengapa memilih Aplikasi Dikos?</h3>
 
