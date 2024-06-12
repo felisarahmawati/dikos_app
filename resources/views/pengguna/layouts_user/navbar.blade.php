@@ -10,8 +10,8 @@
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li><a href="{{ route('pengguna.layouts_user.content') }}" class="">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="{{ route('pengguna.layouts_user.content') }}#about">About</a></li>
+                <li><a href="{{ route('pengguna.layouts_user.content') }}#contact">Contact</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
