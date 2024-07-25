@@ -41,6 +41,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">No.</th>
+                                        <th class="text-center">KTP</th>
                                         <th class="text-center">Bukti Pembayaran</th>
                                         <th class="text-center">Nama</th>
                                         <th class="text-center">Email</th>
@@ -56,9 +57,10 @@
                                     @foreach($reservasi as $index => $reservation)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="text-center"><img src="{{ asset('uploads/ktp/' . $reservation->ktp) }}" alt="KTP" width="100"></td>
                                         <td class="text-center">
                                             @if($reservation->buktiPembayaran && $reservation->buktiPembayaran->bukti_pembayaran)
-                                                <img src="{{ asset('uploads/bukti_pembayaran/' . $reservation->buktiPembayaran->bukti_pembayaran) }}" alt="Bukti Pembayaran" class="img-thumbnail" width="100">
+                                                <img src="{{ asset('uploads/bukti_pembayaran/' . $reservation->buktiPembayaran->bukti_pembayaran) }}" alt="Bukti Pembayaran" width="100">
                                             @else
                                                 <span class="text-danger">Tidak ada bukti pembayaran</span>
                                             @endif
@@ -114,3 +116,5 @@
     });
 </script>
 @endsection
+
+
